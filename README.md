@@ -118,7 +118,7 @@ ng serve --open
 
 ## Usage
 
-This section provides a high-level overivew of how to use ETAMS. For a detailed step-by-step guide, refer to the [User Manual](fixme).
+This section provides a high-level overivew of how to use ETAMS. For a detailed step-by-step guide, refer to the [User Manual](Documentation/User%20Guide.pdf).
 
 ### Default User Credentials 
 Admin Account
@@ -166,7 +166,7 @@ Non-Admin users have access to:
 3. Enter data range or leave blank (Task Activity Report). 
 4. Click Generate Report.
 
-For detailed instructions for the ETAMS application, please refer to the [User Manual](fixme).
+For detailed instructions for the ETAMS application, please refer to the [User Manual](Documentation/User%20Guide.pdf).
 
 ---
 
