@@ -1,0 +1,149 @@
+<clr-datagrid style="height: calc(100vh - 250px)">
+    <!--
+        Column Definitions:
+        - Iterates over the `columns` array to dynamically generate table columns.
+        - Uses `ngSwitch` to apply special formatting to specific columns (e.g., Name, Status, Dates).
+    -->
+    @for (column of columns; track column.key) {
+        <ng-container [ngSwitch]="column.key">
+            <!-- Default Column Display -->
+            <clr-dg-column *ngSwitchDefault [clrDgField]="column.key">
+                {{ column.label }}
+            </clr-dg-column>
+
+            <!-- Special Case: Name Column (Sorted by Last Name Comparator) -->
+            <clr-dg-column *ngSwitchCase="'name'" [clrDgSortBy]="lastNameComparator">
+                Name
+                <clr-dg-string-filter [clrDgStringFilter]="nameFilter"></clr-dg-string-filter>
+            </clr-dg-column>
+        </ng-container>
+    }
+
+    <!--
+        Placeholder for Empty Data:
+        - Displays `emptyMessage` when `isListEmpty` evaluates to true.
+        - Ensures users receive clear feedback when no records exist.
+    -->
+    <clr-dg-placeholder>
+        @if (isListEmpty) {
+            {{ emptyMessage }}
+        }
+    </clr-dg-placeholder>
+
+    <!--
+        Virtual Scrolling for Performance:
+        - Uses Clarity Virtual Scroll (`ClrVirtualScroll`) to optimize rendering large datasets.
+        - Binds to `data` and dynamically renders only the visible portion of the dataset.
+        - Listens for `renderedRangeChange` event to track which rows are currently displayed.
+    -->
+    <ng-template
+            ClrVirtualScroll
+            let-row
+            [clrVirtualRowsOf]="data"
+            (renderedRangeChange)="onRenderRangeChange($event)"
+    >
+
+        <!--
+            Table Row Definition:
+            - Binds each row to `clrDgItem` for Clarity's built-in functionality.
+            - Includes accessibility labels (`clrDgDetailOpenLabel` and `clrDgDetailCloseLabel`) for screen readers.
+            - Clicking a row triggers the `openDetail(row)` method to show additional details.
+        -->
+        <clr-dg-row
+                [clrDgItem]="row"
+                [clrDgDetailOpenLabel]="'View details for ' + row[primaryLabelKey]"
+                [clrDgDetailCloseLabel]="'Close details for ' + row[primaryLabelKey]"
+                (click)="openDetail(row)">
+
+            <!--
+                Action Overflow Menu:
+                - Provides options for editing or deleting a row.
+                - Clicking "Edit" triggers `onEdit(row)`.
+                - Clicking "Delete" triggers `onDelete(row)`.
+            -->
+            <clr-dg-action-overflow>
+                <button class="action-item" (click)="onEdit(row)">
+                    <cds-icon shape="note"></cds-icon>
+                    Edit
+                </button>
+                @if (isAdmin) {
+                    <button class="action-item" (click)="onDelete(row)">
+                        <cds-icon shape="trash"></cds-icon>
+                        Delete
+                    </button>
+                }
+            </clr-dg-action-overflow>
+
+            <!--
+                Dynamic Data Cells:
+                - Iterates over `columns` to generate table cells dynamically.
+                - Uses `ngSwitch` to apply custom formatting for specific fields.
+            -->
+            @for (column of columns; track column.key) {
+                <clr-dg-cell>
+                    <ng-container [ngSwitch]="column.key">
+                        <!-- Special Case: Name Column (Concatenates First and Last Name) -->
+                        <span *ngSwitchCase="'name'">{{ row.firstName + ' ' + row.lastName }}</span>
+
+                        <!-- Special Case: Status Column (Uses custom Status Pipe) -->
+                        <span *ngSwitchCase="'status'">{{ row[column.key] | status }}</span>
+
+                        <!-- Special Case: Deadline Column (Formats date as MM/DD/YYYY) -->
+                        <span *ngSwitchCase="'deadline'">{{ row[column.key] | date: 'MM/dd/yyyy' }}</span>
+
+                        <!-- Special Case: Created Column (Formats date in short format) -->
+                        <span *ngSwitchCase="'createdAt'">{{ row[column.key] | date: 'short' }}</span>
+
+                        <!-- Special Case: Updated Column (Formats date in short format) -->
+                        <span *ngSwitchCase="'updatedAt'">{{ row[column.key] | date: 'short' }}</span>
+
+                        <!-- Special Case: Assigned Employee Column (Leveraging Status Pipe to display null as Unassigned -->
+                        <span *ngSwitchCase="'assignedEmployeeName'">{{ row[column.key] | status }}</span>
+
+                        <!-- Default Case: Displays Raw Column Value -->
+                        <span *ngSwitchDefault>{{ row[column.key] }}</span>
+
+                    </ng-container>
+                </clr-dg-cell>
+            }
+        </clr-dg-row>
+    </ng-template>
+
+    <!--
+        Clarity Datagrid Detail Pane:
+        - Displays additional details for a selected row.
+        - Uses `clrIfDetail` to dynamically populate content based on the selected row.
+        - The `primaryLabelKey` determines the header title dynamically.
+    -->
+    <clr-dg-detail *clrIfDetail="let detail">
+        <clr-dg-detail-header>{{ detail[primaryLabelKey] }}</clr-dg-detail-header>
+        <clr-dg-detail-body>
+            <b cds-text="medium">Details</b>
+            <table class="table">
+                <tr>
+                    <th>Property</th>
+                    <th>Value</th>
+                </tr>
+                <!--
+                    Dynamically generates table rows for each field in the selected row's data.
+                    - Uses `getAllKeys(detail)` to retrieve all field names.
+                    - `formatKey(key)` formats field names into readable labels.
+                -->
+                <tr *ngFor="let key of getAllKeys(detail)">
+                    <td>{{ formatKey(key) }}</td>
+                    <td>{{ detail[key] }}</td>
+                </tr>
+            </table>
+        </clr-dg-detail-body>
+    </clr-dg-detail>
+
+    <!--
+        Table Footer:
+        - Displays the total number of records in the dataset.
+    -->
+    <clr-dg-footer>{{ data.length }} records found</clr-dg-footer>
+</clr-datagrid>
+
+
+
+

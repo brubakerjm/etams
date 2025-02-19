@@ -1,0 +1,96 @@
+<!--
+    Employee Modal Component
+    Displays a form for creating or editing an employee with Clarity UI components.
+-->
+<clr-modal [(clrModalOpen)]="clrModalOpen" (clrModalOpenChange)="closeModal()">
+
+    <!-- Modal Title -->
+    <h3 class="modal-title">{{ isNew ? 'Create Employee' : 'Edit Employee' }}</h3>
+
+    <div class="modal-body">
+    <!-- Employee Form -->
+    <form clrForm clrLayout="horizontal" clrLabelSize="3" [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+
+        <!-- First Name Field -->
+        <clr-input-container>
+            <label for="firstName" class="clr-required-mark">First Name</label>
+            <input clrInput id="firstName" type="text" formControlName="firstName" required size="40"/>
+            <clr-control-error *ngIf="employeeForm.get('firstName')?.errors?.['required']">
+                First name is required.
+            </clr-control-error>
+        </clr-input-container>
+
+        <!-- Last Name Field -->
+        <clr-input-container>
+            <label for="lastName" class="clr-required-mark">Last Name</label>
+            <input clrInput id="lastName" type="text" formControlName="lastName"/>
+            <clr-control-error *ngIf="employeeForm.get('lastName')?.errors?.['required']">
+                Last name is required.
+            </clr-control-error>
+        </clr-input-container>
+
+        <!-- Email Field -->
+        <clr-input-container>
+            <label for="email" class="clr-required-mark">Email</label>
+            <input clrInput id="email" type="email" formControlName="email"/>
+            <clr-control-error *ngIf="employeeForm.get('email')?.errors?.['required']">
+                Email is required.
+            </clr-control-error>
+            <clr-control-error *ngIf="employeeForm.get('email')?.errors?.['email']">
+                Please enter a valid email address.
+            </clr-control-error>
+        </clr-input-container>
+
+        <!-- Username Field -->
+        <clr-input-container>
+            <label for="username" class="clr-required-mark">Username</label>
+            <input clrInput id="username" type="text" formControlName="username"/>
+            <clr-control-error *ngIf="employeeForm.get('username')?.errors?.['required']">
+                Username is required.
+            </clr-control-error>
+            <clr-control-error *ngIf="employeeForm.get('username')?.errors?.['maxlength']">
+                Username cannot exceed 50 characters.
+            </clr-control-error>
+        </clr-input-container>
+
+        <!-- Password Field -->
+        <clr-input-container>
+            <label for="password">{{ isNew ? 'Password' : 'New Password' }}</label>
+            <input clrInput id="password" type="password" formControlName="password"
+                   placeholder="{{ isNew ? 'Enter password' : 'Leave blank to keep current password' }}"/>
+            <clr-control-error *ngIf="employeeForm.get('password')?.errors?.['required']">
+                Password is required.
+            </clr-control-error>
+            <clr-control-error *ngIf="employeeForm.get('password')?.errors?.['pattern']">
+                Password must be at least 8 characters long, containing at least one uppercase letter,
+                one lowercase letter, one digit, and one special character.
+            </clr-control-error>
+        </clr-input-container>
+
+        <!-- Role Field -->
+        <clr-input-container>
+            <label for="role" class="clr-required-mark">Role</label>
+            <input clrInput id="role" type="text" formControlName="role"/>
+            <clr-control-error *ngIf="employeeForm.get('role')?.errors?.['required']">
+                Role is required.
+            </clr-control-error>
+        </clr-input-container>
+
+        <!-- Admin Toggle Switch -->
+        <clr-toggle-container>
+            <label for="admin">Administrator</label>
+            <clr-toggle-wrapper>
+                <input type="checkbox" clrToggle formControlName="admin" id="admin"/>
+            </clr-toggle-wrapper>
+            <clr-control-helper>Enable to grant administrator permissions</clr-control-helper>
+        </clr-toggle-container>
+
+        <!-- Modal Footer with Actions -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline" (click)="closeModal()">Cancel</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!employeeForm.valid">Save</button>
+        </div>
+
+    </form>
+    </div>
+</clr-modal>

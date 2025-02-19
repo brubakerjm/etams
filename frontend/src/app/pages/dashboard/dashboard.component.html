@@ -1,0 +1,17 @@
+<!--<div class="dashboard">-->
+<!--    <div class="metrics-grid">-->
+<!--        <div class="metric-card" *ngFor="let metric of metrics">-->
+<!--            <h2>{{ metric.label }}</h2>-->
+<!--            <p>{{ metric.value }}</p>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<div class="card-columns clr-col-auto">
+    <div class="card" *ngFor="let metric of metrics">
+        <div class="card-header">{{ metric.label }}</div>
+        <div class="card-block">
+            <div class="card-title" style="font-size: 20px">{{ metric.value }}</div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,7 @@
+<div>
+    <a class="nav-link" (click)="toggleTheme()">
+        <cds-icon *ngIf="theme() === 'light'" shape="moon" style="margin-right: 0.5rem"></cds-icon>
+        <cds-icon *ngIf="theme() === 'dark'" shape="sun" style="margin-right: 0.5rem"></cds-icon>
+        {{ theme() === 'light' ? 'Dark' : 'Light' }}
+    </a>
+</div>

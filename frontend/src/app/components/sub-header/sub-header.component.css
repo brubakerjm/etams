@@ -1,0 +1,181 @@
+/*.sub-header {*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    align-items: center;*/
+/*    padding: 16px;*/
+/*    background-color: #f8f9fa;*/
+/*    border-bottom: 1px solid #dee2e6;*/
+/*    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
+/*}*/
+
+/*!* LEFT HEADER *!*/
+/*.left-header {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    gap: 8px;*/
+/*}*/
+
+/*.breadcrumb h3 {*/
+/*    font-size: 1.1rem;*/
+/*    font-weight: bold;*/
+/*    margin: 0;*/
+/*    color: #343a40;*/
+/*}*/
+
+/*.metrics {*/
+/*    display: flex;*/
+/*    flex-wrap: wrap; !* allow wrapping on smaller screens if many metrics *!*/
+/*    gap: 16px;*/
+/*    font-size: 0.875rem;*/
+/*    color: #343a40;*/
+/*}*/
+
+/*.metrics span {*/
+/*    font-weight: 500;*/
+/*}*/
+
+/*!* RIGHT HEADER *!*/
+/*.right-header {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    gap: 16px; !* Space between sections in the right header *!*/
+/*}*/
+
+/*!* SEARCH CONTAINER *!*/
+/*.search-container input {*/
+/*    padding: 8px;*/
+/*    font-size: 0.875rem;*/
+/*    border: 1px solid #ced4da;*/
+/*    border-radius: 4px;*/
+/*}*/
+
+/*!* BUTTON *!*/
+/*.btn-group-a {*/
+/*    display: flex;*/
+/*}*/
+
+/*#new-action-btn {*/
+/*    padding: 8px 16px;*/
+/*    font-size: 0.875rem;*/
+/*    font-weight: bold;*/
+/*    color: #fff;*/
+/*    background-color: #007bff;*/
+/*    border: none;*/
+/*    border-radius: 4px;*/
+/*    cursor: pointer;*/
+/*    transition: background-color 0.3s ease;*/
+/*}*/
+
+/*#new-action-btn:hover {*/
+/*    background-color: #0056b3;*/
+/*}*/
+
+/*!* OPTIONAL GROUP B BUTTONS *!*/
+/*.btn-group-b {*/
+/*    display: flex;*/
+/*    gap: 8px;*/
+/*}*/
+
+/*.btn-group-b button {*/
+/*    padding: 8px 16px;*/
+/*    font-size: 0.875rem;*/
+/*    color: #343a40;*/
+/*    background-color: #e9ecef;*/
+/*    border: none;*/
+/*    border-radius: 4px;*/
+/*    cursor: pointer;*/
+/*    transition: background-color 0.3s ease;*/
+/*}*/
+
+/*.btn-group-b button:hover {*/
+/*    background-color: #ced4da;*/
+/*}*/
+
+/*!* REPORT SELECTION STYLES *!*/
+/*.report-selection {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    gap: 8px;*/
+/*}*/
+
+/*!* Styles for the dropdown and date inputs *!*/
+/*.report-selection select,*/
+/*.report-selection input[type="date"] {*/
+/*    padding: 6px;*/
+/*    font-size: 0.875rem;*/
+/*    border: 1px solid #ced4da;*/
+/*    border-radius: 4px;*/
+/*}*/
+
+/*!* The 'Generate' button for report selection *!*/
+/*.report-selection button {*/
+/*    padding: 8px 16px;*/
+/*    font-size: 0.875rem;*/
+/*    font-weight: bold;*/
+/*    color: #fff;*/
+/*    background-color: #28a745; !* green *!*/
+/*    border: none;*/
+/*    border-radius: 4px;*/
+/*    cursor: pointer;*/
+/*    transition: background-color 0.3s ease;*/
+/*}*/
+
+/*.report-selection button:hover {*/
+/*    background-color: #218838;*/
+/*}*/
+
+/*!* If you wrap your date inputs in a .date-range container *!*/
+/*.date-range {*/
+/*    display: flex;*/
+/*    gap: 8px;*/
+/*    align-items: center;*/
+/*}*/
+
+/*!* OPTIONAL HELP TEXT *!*/
+/*.optional-hint {*/
+/*    display: block;*/
+/*    font-size: 0.75rem;*/
+/*    color: #6c757d;*/
+/*    margin-top: 4px;*/
+/*}*/
+
+/*!* At narrower screens (e.g., below 768px), stack sub-header vertically. *!*/
+/*@media (max-width: 768px) {*/
+/*    .sub-header {*/
+/*        flex-direction: column;*/
+/*        align-items: flex-start;*/
+/*    }*/
+
+/*    .left-header {*/
+/*        width: 100%;*/
+/*    }*/
+
+/*    .right-header {*/
+/*        width: 100%;*/
+/*        margin-top: 8px;*/
+/*        justify-content: flex-start;*/
+/*        flex-wrap: wrap;*/
+/*        gap: 8px;*/
+/*    }*/
+
+/*    !**/
+/*       Make the 'report-selection' items stack vertically instead of side-by-side:*/
+/*       This ensures the dropdown, date fields, and Generate button each go on its own line.*/
+/*    *!*/
+/*    .report-selection {*/
+/*        flex-direction: column;*/
+/*        align-items: stretch;*/
+/*    }*/
+
+/*    !* Let the search container, dropdown, and date inputs take up more horizontal space, if needed *!*/
+/*    .search-container input,*/
+/*    .report-selection select,*/
+/*    .report-selection input[type="date"] {*/
+/*        width: 100%;*/
+/*        max-width: 300px;*/
+/*    }*/
+/*}*/
+
+/*.clr-row {*/
+/*    padding: 0.25rem;*/
+/*}*/

@@ -1,0 +1,150 @@
+<!--Version with search field-->
+
+<!--&lt;!&ndash; Metrics display (enabled by default) &ndash;&gt;-->
+<!--<div class="clr-container">-->
+<!--    @if (metricsEnabled) {-->
+<!--        <div class="clr-row">-->
+<!--            <div class="clr-col">-->
+<!--                <span class="label label-info" *ngFor="let metric of metrics"> {{ metric.label }}-->
+<!--                    <span class="badge badge-info">{{ metric.value }}</span>-->
+<!--                </span>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    }-->
+
+<!--    <div class="clr-row clr-justify-content-between clr-align-items-center">-->
+<!--        &lt;!&ndash; Search field (enabled by default) &ndash;&gt;-->
+<!--        @if (searchEnabled) {-->
+<!--            <div class="clr-flex-column">-->
+<!--                <form class="clr-form">-->
+<!--                    <input-->
+<!--                            type="text"-->
+<!--                            placeholder="Search table..."-->
+<!--                            class="clr-input"-->
+<!--                            [value]="searchService.searchText()"-->
+<!--                            (input)="handleInput($event)"-->
+<!--                    >-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        }-->
+
+<!--        &lt;!&ndash; New Action Button (enabled by default) &ndash;&gt;-->
+
+<!--        @if (newActionBtnEnabled) {-->
+<!--            @if (isAdmin) {-->
+<!--                <div class="clr-flex-column">-->
+<!--                    <button class="btn btn-primary" (click)="triggerNewAction()">New</button>-->
+<!--                </div>-->
+
+<!--            }-->
+<!--        }-->
+
+<!--        @if (reportSelection) {-->
+<!--            <div class="clr-form-control">-->
+<!--                <label for="reportType" class="clr-control-label">Select Report:</label>-->
+<!--                <div class="clr-control-container">-->
+<!--                    <div class="clr-select-wrapper">-->
+<!--                        <select id="reportType" class="clr-select" [(ngModel)]="selectedReport">-->
+<!--                            <option value="overdue">Overdue Tasks Report</option>-->
+<!--                            <option value="activity">Task Activity Report</option>-->
+<!--                        </select>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            @if (selectedReport === 'activity') {-->
+<!--                <clr-date-container>-->
+<!--                    <label>Start Date</label>-->
+<!--                    <input type="date" autocomplete="off" name="date" [(ngModel)]="startDate" clrDate/>-->
+<!--                </clr-date-container>-->
+<!--                <clr-date-container>-->
+<!--                    <label>End Date</label>-->
+<!--                    <input type="date" autocomplete="off" name="date" [(ngModel)]="endDate" clrDate/>-->
+<!--                </clr-date-container>-->
+<!--                <div class="signpost-item">-->
+<!--                    <clr-signpost>-->
+<!--                        <clr-signpost-content [clrPosition]="'bottom-middle'" *clrIfOpen>-->
+<!--                            <p>-->
+<!--                                Leave date blank to show all tasks-->
+<!--                            </p>-->
+<!--                        </clr-signpost-content>-->
+<!--                    </clr-signpost>-->
+<!--                </div>-->
+
+<!--            }-->
+<!--            <div class="">-->
+<!--                <button class="btn btn-primary" (click)="generateReport()">Generate</button>-->
+<!--            </div>-->
+<!--        }-->
+<!--    </div>-->
+<!--</div>-->
+
+<!-- Metrics display (enabled by default) -->
+<div class="clr-container" style="padding-bottom: 0.25rem">
+    <div class="clr-row clr-align-items-center clr-justify-content-between">
+        @if (metricsEnabled) {
+            <div class="clr-flex-column">
+                <span class="label label-info" *ngFor="let metric of metrics"> {{ metric.label }}
+                    <span class="badge badge-info">{{ metric.value }}</span>
+                </span>
+            </div>
+            }
+            @if (newActionBtnEnabled) {
+                @if (isAdmin) {
+                    <div class="clr-flex-column">
+                        <button class="btn btn-primary" (click)="triggerNewAction()">New</button>
+                    </div>
+                }
+            }
+
+        @if (reportSelection) {
+            <div class="clr-flex-column">
+                <form clrForm clrLayout="horizontal" clrLabelSize="4" style="padding: 0 0 0 0.25rem;">
+                    <clr-select-container>
+                        <label for="reportType">Select Report:</label>
+                        <select clrSelect id="reportType" [(ngModel)]="selectedReport" name="reportType">
+                            <option value="overdue">Overdue Tasks Report</option>
+                            <option value="activity">Task Activity Report</option>
+                        </select>
+                    </clr-select-container>
+                </form>
+            </div>
+
+        @if (selectedReport === 'activity') {
+            <div class="clr-flex-column">
+                <form clrForm clrLayout="horizontal" clrLabelSize="3" style="padding: 0">
+                    <clr-date-container>
+                        <label for="endDate">Start Date</label>
+                        <input type="date" id="startDate" name="date" [(ngModel)]="startDate" clrDate autocomplete="off"/>
+                    </clr-date-container>
+                </form>
+            </div>
+
+            <div class="clr-flex-column">
+                    <form clrForm clrLayout="horizontal" clrLabelSize="3" style="padding: 0">
+                        <clr-date-container>
+                            <label for="endDate">End Date</label>
+                            <input type="date" id="endDate" name="date" [(ngModel)]="endDate" clrDate autocomplete="off"/>
+                        </clr-date-container>
+                    </form>
+            </div>
+
+
+            }
+            <div class="clr-flex-column">
+                @if (selectedReport === 'activity') {
+                    <clr-tooltip style="padding-right: 0.5rem">
+                        <cds-icon clrTooltipTrigger shape="info-circle" size="24"></cds-icon>
+                        <clr-tooltip-content [clrPosition]="'left'" [clrSize]="'sm'">
+                            Leave dates blank to show all tasks
+                        </clr-tooltip-content>
+                    </clr-tooltip>
+                }
+                <button class="btn btn-primary" (click)="generateReport()">Generate</button>
+            </div>
+        }
+    </div>
+</div>
+
+
+

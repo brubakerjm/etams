@@ -1,0 +1,17 @@
+<!--<div class="tasks-container">-->
+    <app-sub-header
+            [title]="title"
+            [metrics]="[]"
+            [metricsEnabled]="false"
+            [searchEnabled]="false"
+            [newActionBtnEnabled]="false"
+            [reportSelection]="true"
+            (reportGenerated)="onReportGenerated($event)"
+    ></app-sub-header>
+
+    <app-table
+            [columns]="tableColumns"
+            [data]="displayedTasks"
+            [emptyMessage]="noDataMessage"
+    ></app-table>
+<!--</div>-->

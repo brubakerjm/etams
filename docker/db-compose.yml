@@ -1,0 +1,24 @@
+# For development use
+# To start:
+# docker-compose -f db-compose.yml up -d
+# To stop:
+# docker-compose -f db-compose.yml down
+
+services:
+  dev-db:
+    image: yobasystems/alpine-mariadb
+    container_name: dev-mariadb
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: etams
+      MYSQL_USER: etamsapp
+      MYSQL_PASSWORD: etamsapp
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - dev_db_data:/bitnami/mariadb
+      - ./db-init:/docker-entrypoint-initdb.d # Initialization script
+
+volumes:
+  dev_db_data:

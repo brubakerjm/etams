@@ -1,0 +1,41 @@
+/*.table-row-hover:hover {*/
+/*  background-color: var(--clr-datagrid-row-hover-color, #f5f5f5); !* Use Clarity's variable with fallback *!*/
+/*  transition: background-color 0.2s ease-in-out;*/
+/*}*/
+
+/*!* Table Footer Styling *!*/
+/*!*.table-footer {*!*/
+/*!*  padding: 1rem;*!*/
+/*!*  background-color: var(--clr-thead-bgcolor);*!*/
+/*!*  color: var(--clr-table-font-color);*!*/
+/*!*  font-weight: bold;*!*/
+/*!*  border-top: 1px solid var(--clr-table-border-color, #ddd);*!*/
+/*!*  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);*!*/
+/*!*}*!*/
+
+/*.table-footer {*/
+/*  flex: 0 0 auto;*/
+/*  !*display: flex;*!*/
+/*  flex-flow: row nowrap;*/
+/*  justify-content: space-between;*/
+/*  align-items: stretch;*/
+/*  padding: var(--cds-global-space-5) var(--cds-global-space-7);*/
+/*  font-size: var(--cds-alias-typography-caption-font-size);*/
+/*  font-weight: var(--cds-alias-typography-caption-font-weight);*/
+/*  line-height: var(--cds-alias-typography-caption-line-height);*/
+/*  letter-spacing: var(--cds-alias-typography-caption-letter-spacing);*/
+/*  background-color: var(--clr-thead-bgcolor);*/
+/*  border-style: solid;*/
+/*  border-color: var(--clr-table-footer-border-top-color);*/
+/*  border-width: var(--cds-alias-object-border-width-100);*/
+/*  border-top: none;*/
+/*  border-radius: 0;*/
+/*  border-bottom-right-radius: var(--cds-alias-object-border-radius-100);*/
+/*  border-bottom-left-radius: var(--cds-alias-object-border-radius-100)*/
+/*}*/
+
+/*!* Add spacing and styling similar to Clarity's footer *!*/
+/*tfoot tr td {*/
+/*  font-size: var(--cds-alias-typography-caption-font-size)*/
+/*  !*padding: 0.5rem;*!*/
+/*}*/

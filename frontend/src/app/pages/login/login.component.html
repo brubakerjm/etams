@@ -1,0 +1,70 @@
+<div class="login-wrapper">
+    <form class="login" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+        <!-- Login Header -->
+
+
+        <!-- Login Body -->
+        <div class="login-body">
+            <section class="title">
+                <div class="welcome">Welcome to</div>
+                ETAMS
+                <div class="hint">Employee Task and Assignment Management System</div>
+            </section>
+
+            <div class="login-group">
+                <!-- Username Input -->
+                <clr-input-container>
+                    <label class="clr-sr-only" for="username">Username</label>
+                    <input
+                            id="username"
+                            type="text"
+                            autocomplete="username"
+                            clrInput
+                            formControlName="username"
+                            placeholder="Enter your username"
+                    />
+                    <clr-control-error *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
+                        Username is required.
+                    </clr-control-error>
+                </clr-input-container>
+
+                <!-- Password Input -->
+                <clr-password-container>
+                    <label class="clr-sr-only" for="password">Password</label>
+                    <input
+                            id="password"
+                            type="password"
+                            autocomplete="current-password"
+                            clrPassword
+                            formControlName="password"
+                            placeholder="Enter your password"
+                    />
+                    <clr-control-error *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+                        Password is required.
+                    </clr-control-error>
+                </clr-password-container>
+
+                <!-- Error Message -->
+                <div class="error active" *ngIf="errorMessage">
+                    <clr-icon shape="exclamation-circle"></clr-icon>
+                    {{ errorMessage }}
+                </div>
+
+                <!-- Login Button -->
+                <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid || isLoading">
+                    {{ isLoading ? 'Logging in...' : 'Log in' }}
+                </button>
+            </div>
+        </div>
+
+        <!-- Login Footer -->
+        <div class="login-footer">
+      <span class="copyright">
+        Copyright © 2025 ETAMS. All Rights Reserved.
+      </span>
+            <a href="javascript://">Terms</a>
+            <a href="javascript://">Privacy</a>
+        </div>
+    </form>
+</div>

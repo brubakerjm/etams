@@ -1,0 +1,66 @@
+# DEVELOPMENT
+#networks:
+#  etams-network:  # Network for frontend and backend
+#    driver: bridge
+#    internal: false
+#  db-network:  # Isolated network for the database
+#    driver: bridge
+#    internal: true
+
+services:
+  mysql:
+    image: yobasystems/alpine-mariadb
+    container_name: etams-mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: etams
+      MYSQL_USER: etamsapp
+      MYSQL_PASSWORD: etamsapp
+      MYSQL_ROOT_PASSWORD: r0Otp@ssw0rd!
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ../db-init:/docker-entrypoint-initdb.d
+#    networks:
+#      - db-network
+
+  backend:
+    build:
+      context: ../backend/etams
+      dockerfile: Dockerfile
+    container_name: etams-backend
+    restart: always
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/etams?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: etamsapp
+      SPRING_DATASOURCE_PASSWORD: etamsapp
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.MySQL8Dialect
+      JWT_SECRET: XwZduFBc/Y9YfD+QOOxRLKdtXmfBv/2DFmpuQmaQdYY=
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./back-end/etams/logs:/app/logs
+#    networks:
+#      - etams-network
+#      - db-network
+
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: ../frontend/dockerfile-dev
+    container_name: etams-frontend
+    restart: always
+    depends_on:
+      - backend
+    ports:
+      - "8000:80"
+    volumes:
+      - ../nginx/dev.conf:/etc/nginx/conf.d/default.conf
+#    networks:
+#      - etams-network
+
+volumes:
+  mysql_data:

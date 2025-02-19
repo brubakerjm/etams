@@ -1,0 +1,29 @@
+/*@import '@cds/core/global.min.css';*/
+/*@import '@cds/core/styles/theme.dark.min.css';*/
+/*@import '@clr/ui/clr-ui.min.css';*/
+
+* {
+  /*font-family: 'Open Sans', Arial, sans-serif;*/
+  /*font-weight: 400;*/
+  /*font-optical-sizing: auto;*/
+  /*box-sizing: border-box;*/
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden;
+}
+/*body {*/
+/*  min-height: 100vh; !* Ensures full viewport height without restricting content *!*/
+/*  margin: 0;*/
+/*  padding: 0;*/
+/*  overflow-x: hidden; !* Prevents horizontal scrolling *!*/
+/*}*/
+
+html, body {
+  box-sizing: border-box;
+  width: 100%;
+}

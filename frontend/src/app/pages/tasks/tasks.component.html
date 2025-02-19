@@ -1,0 +1,72 @@
+<!--
+    Sub-header Component
+    - Displays the page title and relevant task metrics.
+    - Provides a button for creating a new task.
+    - `metrics`: An array containing key-value pairs for various task-related statistics.
+    - `title`: The page title displayed in the sub-header.
+    - `(newAction)`: Emits an event to trigger the task creation modal.
+-->
+<app-sub-header
+        [metrics]="metrics"
+        [title]="title"
+        (newAction)="openModal()">
+</app-sub-header>
+
+<!--
+    Task Table Component
+    - Displays the list of tasks in a structured table.
+    - Supports dynamic column definition and row actions (edit/delete).
+    - `columns`: Defines the table headers, specifying which properties to display.
+    - `data`: Binds the task list to the table.
+    - `emptyMessage`: Custom message displayed when there are no tasks.
+        - If `isAdmin === true`: Displays "There are no tasks created."
+        - If `isAdmin === false`: Displays "There are no tasks assigned to you."
+    - `(editClick)`: Emits an event when a task row is clicked for editing.
+    - `(deleteClick)`: Emits an event when the delete button is clicked.
+-->
+<app-table
+        [columns]="tableColumns"
+        [data]="tasks"
+        [emptyMessage]="isAdmin ? 'There are no tasks created' : 'There are no tasks assigned to you'"
+        (editClick)="openModal($event)"
+        (deleteClick)="confirmDeleteTask($event)">
+</app-table>
+
+<!--
+    Task Modal Component
+    - Displays a modal for creating or editing a task.
+    - Dynamically binds to `selectedTask` when editing.
+    - Emits events for saving or closing the modal.
+    - `clrModalOpen`: Controls the modal's visibility.
+    - `task`: The task object being edited or created.
+    - `isNew`: Indicates whether the modal is in create (`true`) or edit (`false`) mode.
+    - `(save)`: Emits an event when a task is saved.
+    - `(close)`: Emits an event when the modal is closed without saving.
+-->
+<app-tasks-modal
+        [(clrModalOpen)]="isModalOpen"
+        [task]="selectedTask!"
+        [isNew]="isNew"
+        (save)="saveTask($event)"
+        (close)="closeModal()">
+</app-tasks-modal>
+
+<!--
+    Task Deletion Confirmation Modal
+    - Displays a confirmation prompt before deleting a task.
+    - Dynamically shows the task name to confirm deletion.
+    - Calls `deleteTask()` when confirmed.
+    - Closes the modal when canceled.
+    - `show`: Boolean flag to control the modal’s visibility.
+    - `title`: Sets the title of the confirmation modal.
+    - `message`: Displays a message with the task name to confirm deletion.
+    - `(confirmed)`: Emits an event to delete the task.
+    - `(canceled)`: Emits an event to close the modal without deleting.
+-->
+<app-confirm-modal
+        [show]="showDeleteConfirmation"
+        title="Task Deletion"
+        [message]="'Are you sure you want to delete the task ' + taskToDelete?.title + '?'"
+        (confirmed)="deleteTask()"
+        (canceled)="showDeleteConfirmation = false">
+</app-confirm-modal>

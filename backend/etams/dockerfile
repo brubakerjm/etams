@@ -1,0 +1,69 @@
+## Temurin Build for High Resource Availability Deployments ##
+
+## Stage 1: Build the Spring Boot application
+#FROM eclipse-temurin:21-jdk AS build
+#
+#WORKDIR /app
+#
+## Copy only the necessary files for Maven to download dependencies
+#COPY pom.xml mvnw mvnw.cmd ./
+#COPY .mvn .mvn/
+#
+## Download dependencies (cached)
+#RUN ./mvnw dependency:go-offline -B
+#
+## Copy the source code.  COPY src/main/java and resources separately for better caching
+#COPY src/main/java src/main/java
+#COPY src/main/resources src/main/resources
+#
+## Package the application
+#RUN ./mvnw clean package -DskipTests
+#
+## Stage 2: Create the final image
+#FROM eclipse-temurin:21-jre-alpine
+#
+#WORKDIR /app
+#
+## Copy the JAR file
+#COPY --from=build /app/target/*.jar app.jar
+#
+## Set environment variables (if needed)
+#ENV SPRING_PROFILES_ACTIVE=production
+#
+## Use a shell script to run the JAR (for graceful shutdown)
+#COPY entrypoint.sh .
+#RUN chmod +x entrypoint.sh
+#ENTRYPOINT ["java", "-jar", "app.jar"]
+
+## OPENJ9 Build Optimized for Minimal Resource Deployments ##
+
+# Stage 1: Build the Spring Boot application
+FROM ibm-semeru-runtimes:open-21-jdk AS build
+WORKDIR /app
+
+# Install required dependencies for Maven Wrapper
+RUN apt-get update && apt-get install -y --no-install-recommends tar gzip && rm -rf /var/lib/apt/lists/*
+
+# Copy only the necessary files for Maven dependency caching
+COPY pom.xml mvnw mvnw.cmd ./
+COPY .mvn .mvn/
+
+# Pre-download dependencies and cache them
+RUN chmod +x mvnw && ./mvnw dependency:go-offline -B
+
+# Copy only the source files separately for better caching
+COPY src/ src/
+
+# Compile and package the application (skip tests for faster build)
+RUN ./mvnw clean package -DskipTests
+
+# Stage 2: Create the final lightweight runtime image
+FROM ibm-semeru-runtimes:open-21-jre
+
+WORKDIR /app
+
+# Copy only the built JAR file
+COPY --from=build /app/target/*.jar app.jar
+
+# Allow JAVA_OPTS to be overridden at runtime
+ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]

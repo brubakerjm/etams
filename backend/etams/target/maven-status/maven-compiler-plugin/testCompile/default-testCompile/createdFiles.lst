@@ -1,0 +1,3 @@
+com/brubaker/etams/EtamsApplicationTests.class
+com/brubaker/etams/service/TaskServiceTest.class
+com/brubaker/etams/controller/AuthControllerTest.class
