@@ -13,12 +13,11 @@ _A Full Stack Employee Task Management System_
 - [Screenshots](#screenshots)
 - [Contact](#contact)
 
----
+
 ## Overview
 
 ETAMS (Employee Task and Management System) is a full-stack web application designed to streamline task assignment and management for teams. It provides a dashboard for admins to oversee employees and tasks, while non-admin users can track and manage their assigned work. ETAMS was developed as part of my capstone project to demonstrate my ability to build scalable and secure enterprise applications.
 
----
 
 ## Features
 
@@ -30,8 +29,6 @@ The features of ETAMS includes:
 - Dynamic reporting for performance insights 
 - JWT-based authentication and authorization 
 - RESTful API for backend communication
-
----
 
 ## Tech Stack
 
@@ -51,8 +48,6 @@ Database:
 Deployment:
 - Docker & Docker Compose
 - Nginx reverse proxy
-
----
 
 ## Project Structure
 
@@ -75,8 +70,6 @@ Deployment:
   ├── nginx/                     # Nginx configurations
   └── README.md                  # Me!
 ```
-
----
 
 ## Installation & Setup
 
@@ -113,8 +106,6 @@ ng serve --open
 - Started manually:
 
 `http://localhost:4200`
-
----
 
 ## Usage
 
@@ -168,17 +159,14 @@ Non-Admin users have access to:
 
 For detailed instructions for the ETAMS application, please refer to the [User Manual](Documentation/User%20Guide.pdf).
 
----
-
-### API Endpoints
+## API Endpoints
 
 To view the API endpoints implemented in ETAMS, visit the Swagger UI page with the ETAMS application running:
 
 `http://localhost:8080/swagger-ui/index.html#/`
 
----
 
-### Screenshots
+## Screenshots
 
 ![ETAMS Dashboard](screenshots/login.png)
 ![ETAMS Dashboard](screenshots/dashboard.png)
@@ -186,9 +174,8 @@ To view the API endpoints implemented in ETAMS, visit the Swagger UI page with t
 ![ETAMS Dashboard](screenshots/tasks.png)
 ![ETAMS Dashboard](screenshots/reports.png)
 
----
 
-### Contact
+## Contact
 
 * **Author:** Jacob Brubaker
 * **Email:** brubakerjm@gmail.com
