@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 /**
- * Unit tests for the {@link TaskService} class.
+ * Unit tests for the {@link TaskServiceImpl} class.
  * Ensures that task management operations such as retrieval, creation,
  * updating, and deletion are functioning correctly.
  */

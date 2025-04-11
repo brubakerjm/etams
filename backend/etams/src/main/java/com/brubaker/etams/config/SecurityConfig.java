@@ -1,8 +1,8 @@
 package com.brubaker.etams.config;
 
 import com.brubaker.etams.security.JwtAuthenticationFilter;
-import com.brubaker.etams.service.CustomUserDetailsService;
 import com.brubaker.etams.security.JwtUtil;
+import com.brubaker.etams.service.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

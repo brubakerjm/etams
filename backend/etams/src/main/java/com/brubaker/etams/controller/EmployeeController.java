@@ -2,20 +2,20 @@ package com.brubaker.etams.controller;
 
 import com.brubaker.etams.dto.EmployeeDTO;
 import com.brubaker.etams.dto.PasswordUpdateDTO;
-import com.brubaker.etams.service.EmployeeService;
+import com.brubaker.etams.service.EmployeeServiceImpl;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import jakarta.validation.Valid; // Updated import for @Valid
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/employees")
 public class EmployeeController {
 
-    private final EmployeeService employeeService;
+    private final EmployeeServiceImpl employeeService;
 
-    public EmployeeController(EmployeeService employeeService) {
+    public EmployeeController(EmployeeServiceImpl employeeService) {
         this.employeeService = employeeService;
     }
 

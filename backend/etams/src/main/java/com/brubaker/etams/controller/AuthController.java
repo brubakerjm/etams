@@ -1,21 +1,12 @@
 package com.brubaker.etams.controller;
 
 import com.brubaker.etams.dto.LoginRequestDTO;
-import com.brubaker.etams.dto.LoginResponseDTO;
-import com.brubaker.etams.entity.Employee;
-import com.brubaker.etams.repository.EmployeeRepo;
-import com.brubaker.etams.security.JwtUtil;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.brubaker.etams.service.AuthService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Controller for handling authentication-related requests.
@@ -27,14 +18,12 @@ import java.util.Optional;
 @RequestMapping("/auth")
 public class AuthController {
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
 
-    @Autowired
-    private JwtUtil jwtUtil;
+    private final AuthService authService;
 
-    @Autowired
-    private EmployeeRepo employeeRepo;
+    public AuthController(AuthService authService) {
+        this.authService = authService;
+    }
 
     /**
      * Handles user login authentication.
@@ -49,38 +38,6 @@ public class AuthController {
      */
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequestDTO loginRequest) {
-        if (loginRequest.getUsername() == null || loginRequest.getPassword() == null) {
-            return ResponseEntity.badRequest().body("Invalid request. Username and password are required.");
-        }
-
-        Optional<Employee> employeeOpt = employeeRepo.findByUsername(loginRequest.getUsername());
-
-        if (employeeOpt.isEmpty()) {
-            return ResponseEntity.status(404).body("User not found. Please check your username.");
-        }
-
-        try {
-            Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(
-                            loginRequest.getUsername(),
-                            loginRequest.getPassword()
-                    )
-            );
-
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-            User userDetails = (User) authentication.getPrincipal();
-
-            Employee employee = employeeOpt.get();
-            boolean isAdmin = employee.isAdmin();
-
-            String jwtToken = jwtUtil.generateToken(employee.getId(), userDetails.getUsername(), isAdmin);
-
-            return ResponseEntity.ok(new LoginResponseDTO(jwtToken, userDetails.getUsername(), isAdmin, employee.getId()));
-
-        } catch (BadCredentialsException e) {
-            return ResponseEntity.status(401).body("Incorrect username or password.");
-        } catch (Exception e) {
-            return ResponseEntity.status(500).body("Something went wrong on our end. Please try again later.");
-        }
+        return authService.login(loginRequest);
     }
 }
