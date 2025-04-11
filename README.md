@@ -134,9 +134,9 @@ Admin users have access to:
 
 Creating Employees 
 Navigate to the Employees section. 
-2. Click New. 
-3. Enter employee details (first name, last name, email, etc.). 
-4. Click Save.
+1. Click New. 
+2. Enter employee details (first name, last name, email, etc.). 
+3. Click Save.
 
 Creating Tasks
 1. Navigate to the Tasks section.
